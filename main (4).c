@@ -2,23 +2,23 @@
 #include <stdlib.h>
 #include <time.h>
 
-// DefiniÁ„o do tamanho do labirinto
+// Defini√ß√£o do tamanho do labirinto
 #define LINHAS 12
 #define COLUNAS 12
 
-// DeclaraÁ„o das vari·veis globais
+// Declara√ß√£o das vari√°veis globais
 int jogadorX, jogadorY;
 int chaveX, chaveY;
 int portaX, portaY;
 char labirinto[LINHAS][COLUNAS];
 int possuichave = 0;
-int fim1 = 0; // Adicionando ponto e vÌrgula
+int fim1 = 0; // Adicionando ponto e v√≠rgula
 int eminemY2, eminemX2;
 
-// FunÁ„o para inicializar o labirinto
+// Fun√ß√£o para inicializar o labirinto
 void inicializarLabirinto() {
     int i, j;
-    // Preencher o labirinto com espaÁos em branco
+    // Preencher o labirinto com espa√ßos em branco
     for(i = 0; i < LINHAS; i++) {
         for (j = 0; j < COLUNAS; j++) {
             if(i==0 || i==11 || j==0 || j==11){
@@ -28,28 +28,28 @@ void inicializarLabirinto() {
             }
         }
     }
-    // Colocar o jogador na posiÁ„o inicial
+    // Colocar o jogador na posi√ß√£o inicial
     jogadorX = 1;
     jogadorY = 1;
     labirinto[jogadorY][jogadorX] = '&'; // '&' representa o jogador
 
-    // Colocar a chave em uma posiÁ„o aleatÛria
+    // Colocar a chave em uma posi√ß√£o aleat√≥ria
     srand(time(NULL));
     chaveX = rand() % (COLUNAS - 2) + 1;
     chaveY = rand() % (LINHAS - 2) + 1;
     labirinto[chaveY][chaveX] = '@'; // '@' representa a chave
 
-    // Colocar a porta fechada em uma posiÁ„o aleatÛria
+    // Colocar a porta fechada em uma posi√ß√£o aleat√≥ria
     portaX = rand() % (COLUNAS - 2) + 1;
     portaY = rand() % (LINHAS - 2) + 1;
     labirinto[portaY][portaX] = 'D'; // 'D' representa a porta fechada
-    // Colocar o inimigo em uma posiÁ„o aleatÛria
+    // Colocar o inimigo em uma posi√ß√£o aleat√≥ria
     eminemX2 = rand() % (COLUNAS - 2) + 1;
     eminemY2 = rand() % (LINHAS - 2) + 1;
-    labirinto[eminemY2][eminemX2] = 'E'; // 'E' representa o inimigo
+    labirinto[eminemY2][eminemX2] = 'X'; // 'X' representa o inimigo
 }
 
-// FunÁ„o para imprimir o labirinto na tela
+// Fun√ß√£o para imprimir o labirinto na tela
 void imprimirLabirinto() {
     int i, j;
     system("cls");
@@ -61,11 +61,11 @@ void imprimirLabirinto() {
     }
 }
 
-// FunÁ„o para mover o jogador
+// Fun√ß√£o para mover o jogador
 void moverJogador(char direcao) {
     int novoX = jogadorX;
     int novoY = jogadorY;
-    // Calcular a nova posiÁ„o do jogador
+    // Calcular a nova posi√ß√£o do jogador
     switch (direcao) {
         case 'w':
             novoY--;
@@ -85,9 +85,9 @@ void moverJogador(char direcao) {
             }
             break;
     }
-    // Verificar se a nova posiÁ„o È v·lida
-    if (novoX >= 0 && novoX < COLUNAS && novoY >= 0 && novoY < LINHAS && labirinto[novoY][novoX] != '*') { // Corrigindo a condiÁ„o
-        // Atualizar a posiÁ„o do jogador
+    // Verificar se a nova posi√ß√£o √© v√°lida
+    if (novoX >= 0 && novoX < COLUNAS && novoY >= 0 && novoY < LINHAS && labirinto[novoY][novoX] != '*') { // Corrigindo a condi√ß√£o
+        // Atualizar a posi√ß√£o do jogador
         labirinto[jogadorY][jogadorX] = ' ';
         jogadorX = novoX;
         jogadorY = novoY;
@@ -96,12 +96,12 @@ void moverJogador(char direcao) {
         if (possuichave == 1) {
             printf("Voce pegou a chave!\n");
             labirinto[chaveY][chaveX] = ' ';
-            labirinto[portaY][portaX] = '='; // 'D' se torna '=' indicando que a porta est· aberta
+            labirinto[portaY][portaX] = '='; // 'D' se torna '=' indicando que a porta est√° aberta
         } else {
             labirinto[chaveY][chaveX] = '@';
             labirinto[portaY][portaX] = 'D';
         }
-        // Verificar se o jogador chegou ‡ porta com a chave
+        // Verificar se o jogador chegou √† porta com a chave
         if (jogadorX == portaX && jogadorY == portaY && possuichave == 1) {
             system("cls");
             printf("VOCE PASSOU DE FASE!!!\n");
@@ -152,19 +152,19 @@ void eminemMove2(){
 			}
 			break;
 	}
-    if (novoEX >= 0 && novoEX < COLUNAS && novoEY >= 0 && novoEY < LINHAS && labirinto[novoEY][novoEX] != '*') { // Corrigindo a condiÁ„o
-        // Atualizar a posiÁ„o do jogador
+    if (novoEX >= 0 && novoEX < COLUNAS && novoEY >= 0 && novoEY < LINHAS && labirinto[novoEY][novoEX] != '*') { // Corrigindo a condi√ß√£o
+        // Atualizar a posi√ß√£o do jogador
         labirinto[eminemY2][eminemX2] = ' ';
         eminemX2 = novoEX;
         eminemY2 = novoEY;
-        labirinto[eminemY2][eminemX2] = 'E';
+        labirinto[eminemY2][eminemX2] = 'X';
 	}
 }
 int main() {
 	char menu;
 	int iniciar = 0;
     printf("Menu Inicia:\n\n[1] Jogar\n[2] Tutorial\n[3] Sair\n\nEscolha:");
-    scanf(" %c", &menu); // Adicionei um espaÁo antes do %c para ignorar espaÁos em branco
+    scanf(" %c", &menu); // Adicionei um espa√ßo antes do %c para ignorar espa√ßos em branco
 
     if(menu == '1') {
         system("cls");
@@ -173,7 +173,7 @@ int main() {
     else if(menu == '2') {
         while(iniciar != 1){
         	system("cls");
-        	printf("O jogador possui os seguintes comandos:\n\nW: O jogador movimenta uma unidade para cima;\nA: O jogador movimenta uma unidade para esquerda;\nS: O jogador movimenta uma unidade para baixo;\nD: O jogador movimenta uma unidade para direita;\nI: O jogador interage com o objeto que est· em cima.\n\nO jogo possui os seguintes elementos nas fases:\n\n&: SÌmbolo que representa o jogador.\n*: SÌmbolo que representa uma parede, o jogador ao se movimentar n„o pode passar pela parede.\n@: SÌmbolo que representa a chave para abrir a porta para finalizar a fase, a porta abre no momento que o jogador interage com a chave.\nD: SÌmbolo que representa a porta fechada.\n=: SÌmbolo que representa a porta aberta quando o jogador interage com a chave.\nO: SÌmbolo que representa um bot„o que o usu·rio pode interagir, o bot„o fica no ch„o e o jogador deve ficar em cima dele para poder interagir.\n#: SÌmbolo que representa um espinho. A fase È reiniciada quando o jogador toca no espinho, caso a fase seja reiniciada trÍs vezes, o jogo volta para o menu principal.\n>: SÌmbolo que representa um teletransporte. O teletransporte sempre deve vir em pares, quando o jogador toca em um ele È transportado para o outro e vice-versa.\nX: SÌmbolo que representa o monstro nÌvel 1. Esse monstro tem um movimento aleatÛrio para cima, para esquerda, para baixo e para direita. Caso o monstro toque no jogador, a fase È reiniciada.\nV: SÌmbolo que representa o monstro nÌvel 2. Esse monstro tem uma inteligÍncia para seguir o jogador (h· v·rias maneiras de implementar isso). Caso o monstro toque no jogador, a fase È reiniciada.\n\nPrecione 1 para iniciar o jogo:");
+        	printf("O jogador possui os seguintes comandos:\n\nW: O jogador movimenta uma unidade para cima;\nA: O jogador movimenta uma unidade para esquerda;\nS: O jogador movimenta uma unidade para baixo;\nD: O jogador movimenta uma unidade para direita;\nI: O jogador interage com o objeto que est√° em cima.\n\nO jogo possui os seguintes elementos nas fases:\n\n&: S√≠mbolo que representa o jogador.\n*: S√≠mbolo que representa uma parede, o jogador ao se movimentar n√£o pode passar pela parede.\n@: S√≠mbolo que representa a chave para abrir a porta para finalizar a fase, a porta abre no momento que o jogador interage com a chave.\nD: S√≠mbolo que representa a porta fechada.\n=: S√≠mbolo que representa a porta aberta quando o jogador interage com a chave.\nO: S√≠mbolo que representa um bot√£o que o usu√°rio pode interagir, o bot√£o fica no ch√£o e o jogador deve ficar em cima dele para poder interagir.\n#: S√≠mbolo que representa um espinho. A fase √© reiniciada quando o jogador toca no espinho, caso a fase seja reiniciada tr√™s vezes, o jogo volta para o menu principal.\n>: S√≠mbolo que representa um teletransporte. O teletransporte sempre deve vir em pares, quando o jogador toca em um ele √© transportado para o outro e vice-versa.\nX: S√≠mbolo que representa o monstro n√≠vel 1. Esse monstro tem um movimento aleat√≥rio para cima, para esquerda, para baixo e para direita. Caso o monstro toque no jogador, a fase √© reiniciada.\nV: S√≠mbolo que representa o monstro n√≠vel 2. Esse monstro tem uma intelig√™ncia para seguir o jogador (h√° v√°rias maneiras de implementar isso). Caso o monstro toque no jogador, a fase √© reiniciada.\n\nPrecione 1 para iniciar o jogo:");
         	scanf("%d", &iniciar);
 		}
     }
@@ -186,7 +186,7 @@ int main() {
     	// Inicializar o labirinto
     	inicializarLabirinto();
     	// Loop principal do jogo
-    	while (!fim1) { // Utilizando a vari·vel de controle de fim do jogo
+    	while (!fim1) { // Utilizando a vari√°vel de controle de fim do jogo
   	      // Imprimir o labirinto
   	      imprimirLabirinto();
   	      // Ler o movimento do jogador
